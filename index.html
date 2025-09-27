@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hiring Wallah - PM Internship Scheme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* General Styles & Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background-color: #f0f2f5;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    /* --- Styles for Internal Pages (Non-Home) --- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e40af;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background-color: #ff6b35; /* Orange/Saffron for Indian theme */
+      border-radius: 8px;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links li {
+      margin-left: 25px;
+    }
+
+    .nav-links a {
+      color: #555;
+      font-weight: 500;
+      padding: 5px 0;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: #1e40af;
+    }
+    /* End Internal Navbar Styles */
+
+
+    /* Button Styles */
+    .btn { padding: 10px 20px; border-radius: 5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: none; }
+    .btn-primary { background-color: #f97316; color: #fff; }
+    .btn-secondary-orange { 
+        background-color: #f97316;
+        color: #fff;
+        padding: 15px 20px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+    }
+    .btn-outline { border: 2px solid #1e40af; color: #1e40af; background-color: transparent; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+
+    /* Main Content Sections */
+    .section { padding: 60px 0; display: none; animation: fadeIn 0.8s ease-in-out; }
+    .section.active { display: block; }
+    .card { background: #fff; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); text-align: center; }
+
+    /* Login/Signup Card Styling */
+    #login .card, #signup .card { max-width: 380px; margin: 40px auto; padding: 40px 30px; }
+    
+    /* --- HOME PAGE STYLING (Same-to-Same) --- */
+    .home-header-top { background-color: #f97316; color: white; padding: 5px 0; font-size: 0.8rem; }
+    .home-header-top .container { display: flex; justify-content: space-between; align-items: center; }
+    .gov-portal-nav { background: linear-gradient(to right, #3b82f6, #1e40af); padding: 10px 0; }
+    .gov-portal-nav .container { display: flex; align-items: center; justify-content: space-between; color: white; }
+    .gov-logo-section { display: flex; align-items: center; gap: 10px; }
+    .gov-logo-section img { height: 70px; }
+    .gov-title-text h1 { font-size: 1.5rem; margin: 0; font-weight: 700; }
+    .gov-title-text p { font-size: 0.85rem; margin: 0; opacity: 0.8; }
+    .gov-nav-links { display: flex; list-style: none; gap: 15px; font-size: 0.9rem; font-weight: 500; }
+    .gov-nav-links a { color: white; text-decoration: none; transition: opacity 0.2s; }
+    .home-search-bar { max-width: 600px; margin: 20px auto; display: flex; justify-content: center; align-items: center; padding: 0; }
+    .home-search-bar input { flex-grow: 1; padding: 10px 15px; border: 1px solid #ccc; border-right: none; border-radius: 5px 0 0 5px; font-size: 1rem; outline: none; }
+    .home-search-bar button { background-color: #1e40af; color: white; padding: 11px 25px; border: none; border-radius: 0 5px 5px 0; font-weight: 600; cursor: pointer; }
+    .home-content-area { background-color: #4b5563; color: white; padding: 80px 20px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+    .home-content-area h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 10px; }
+    .home-content-area p { font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px; opacity: 0.9; }
+    .home-content-area .apply-btn { background-color: #f97316; color: white; padding: 12px 30px; font-size: 1.1rem; border-radius: 5px; font-weight: 600; transition: transform 0.2s ease; }
+    .home-content-area .apply-btn:hover { transform: scale(1.05); }
+
+    /* --- ADDED SCROLLABLE HOME SECTIONS --- */
+    .info-section { padding: 40px 0; text-align: center; }
+    .info-section h2 { font-size: 1.8rem; color: #1e40af; margin-bottom: 30px; font-weight: 700; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+    .quick-access-card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); text-align: center; border-top: 5px solid #ff6b35; }
+    .quick-access-card h4 { color: #1e40af; margin: 10px 0; font-weight: 600; }
+    .quick-access-card .icon { font-size: 2.5rem; color: #10b981; }
+    .about-portal { background-color: #ffffff; padding: 50px 0; border-top: 1px solid #eee; }
+    .about-portal .content { max-width: 800px; margin: 0 auto; text-align: left; }
+    .about-portal h3 { color: #1e40af; margin-bottom: 15px; font-size: 1.5rem; }
+    .about-portal ul { list-style: none; padding: 0; margin-top: 15px; }
+    .about-portal ul li { margin-bottom: 8px; color: #555; }
+    /* End Home Scrollable Styles */
+
+
+    /* --- POST INTERNSHIP STYLES (Locked State) --- */
+    #post-internship .card { max-width: 650px; margin: 40px auto; text-align: left; }
+    #post-internship h2 { color: #1e40af; font-size: 2rem; margin-bottom: 10px; }
+    #post-internship .sub-header { font-size: 1.1rem; color: #555; margin-bottom: 30px; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; }
+    .form-tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 0; }
+    .form-tags .tag { display: inline-block; background-color: #e6f0ff; color: #1e40af; padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; }
+    .form-tags .tag.selected { background-color: #10b981; color: white; border-color: #0d9967; font-weight: 600; }
+    /* End Post Internship Styles */
+
+
+    /* --- FIND INTERNSHIP STYLES (ENLARGED & LOCKED STATE) --- */
+    
+    #internships .card {
+        max-width: 900px; /* Increased max-width for bigger appeal */
+        padding: 60px; /* Increased padding */
+    }
+    
+    #internships h2 {
+        font-size: 2rem; /* Larger heading */
+    }
+
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; }
+    .form-group.inline-fields { display: flex; gap: 25px; }
+    .form-section { margin-bottom: 35px; text-align: left; }
+    
+    /* Manual Search Grid Checkboxes */
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: 10px 0; }
+    .grid-item { display: flex; align-items: center; gap: 10px; font-size: 1rem; cursor: pointer; user-select: none; padding: 10px 12px; border-radius: 6px; background-color: #f7f7f7; border: 1px solid #eee; transition: all 0.2s ease; }
+    .grid-item input[type="checkbox"] { -webkit-appearance: none; -moz-appearance: none; appearance: none; width: 20px; height: 20px; border: 2px solid #1e40af; border-radius: 4px; outline: none; transition: all 0.2s; cursor: pointer; flex-shrink: 0; position: relative; }
+    .grid-item input[type="checkbox"]:checked { background-color: #1e40af; border-color: #1e40af; }
+    .grid-item input[type="checkbox"]:checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 16px; color: white; font-weight: bold; }
+    
+    /* Tabs */
+    .tab-container { max-width: 500px; margin: 0 auto 40px; border: 1px solid #ddd; border-radius: 5px; overflow: hidden; display: flex;}
+    .tab-button { flex: 1; padding: 12px 25px; background-color: #f7f7f7; border: none; cursor: pointer; font-size: 1rem; font-weight: 600; transition: all 0.3s ease; }
+    .tab-button.active { background-color: #fff; color: #1e40af; border-bottom: 2px solid #1e40af; }
+    
+    /* AI Scan */
+    .ai-scan-content { max-width: 700px; margin: 0 auto; text-align: center; padding-top: 30px; }
+    .upload-area-box { border: 1px dashed #1e40af; border-radius: 8px; padding: 35px 25px; margin-top: 25px; text-align: center; cursor: pointer; transition: background-color 0.2s ease; }
+    .upload-area-box h4 { color: #1e40af; margin-bottom: 10px; font-size: 1.2rem; }
+    
+    /* Loading state spinner */
+    .loading-container { text-align: center; padding: 50px 0; }
+    .loader { border: 6px solid #f3f3f3; border-top: 6px solid #1e40af; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite; margin: 0 auto 20px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    
+    /* Recommendation Results */
+    #recommendation-list, #resume-recommendation-list { display: flex; flex-direction: column; margin-top: 40px; gap: 30px; }
+    .rec-card { background: #fff; padding: 25px 35px; border-radius: 12px; border: 1px solid #ddd; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); text-align: left; border-left: 6px solid #ff6b35; }
+    .rec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .rec-header h4 { color: #1e40af; font-size: 1.35rem; }
+    .rec-header span { font-size: 0.9rem; color: #777; padding: 3px 10px; border-radius: 12px; background: #f0f2f5; }
+    .match-reason-box { background-color: #e6f0ff; border: 1px solid #cce0ff; padding: 20px; border-radius: 8px; margin: 20px 0; font-size: 0.95rem; color: #1e40af; }
+    .match-reason-box strong { color: #007bff; display: block; margin-bottom: 5px; font-size: 1.1rem; }
+    .key-requirements { margin-top: 20px; font-size: 0.9rem; color: #555; }
+    .key-requirements strong { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
+    .req-tag { display: inline-block; background-color: #10b981; color: white; padding: 4px 10px; border-radius: 15px; font-size: 0.8rem; margin-right: 8px; margin-bottom: 5px; font-weight: 500; }
+    .action-buttons { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-start; }
+    
+    /* End Find Internship Styles (Locked State) */
+
+    /* Footer and Chatbot Styles (Existing) */
+    .chatbot-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background-color: #10b981; /* Green */
+      border-radius: 50%;
+      color: white;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.5);
+      cursor: pointer;
+      z-index: 1001;
+      display: flex; /* Centering the icon */
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+
+    .chat-window {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 350px;
+      height: 450px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      display: none; /* Controlled by JS */
+      flex-direction: column;
+      z-index: 1002;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: linear-gradient(to right, #3b82f6, #1e40af);
+      color: white;
+      padding: 15px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-body {
+      flex-grow: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background-color: #f8f8f8;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .chat-input-area {
+      padding: 10px;
+      border-top: 1px solid #eee;
+      display: flex;
+    }
+
+    .chat-input-area input {
+      flex-grow: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+    }
+
+    .chat-input-area button {
+      background-color: #ff6b35;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+    
+    .message {
+        max-width: 80%;
+        padding: 8px 12px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+    }
+
+    .message.bot {
+        background-color: #d1e0ff;
+        align-self: flex-start;
+    }
+
+    .message.user {
+        background-color: #10b981;
+        color: white;
+        align-self: flex-end;
+    }
+
+    footer { background-color: #1e40af; color: white; padding: 40px 0; }
+    .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; text-align: left; }
+    .footer-section { flex: 1; min-width: 200px; margin: 0 15px 30px 0; }
+    .footer-section h4 { font-size: 1.2rem; margin-bottom: 15px; font-weight: 600; border-bottom: 2px solid #3b82f6; padding-bottom: 5px; }
+    .footer-section ul { list-style: none; padding: 0; }
+    .footer-section ul li { margin-bottom: 8px; }
+    .footer-section a { color: #d1e0ff; font-size: 0.95rem; transition: color 0.2s; }
+    .footer-section a:hover { color: white; }
+    
+    @media (max-width: 768px) {
+      .navbar { flex-direction: column; }
+      .nav-links { margin-top: 15px; }
+      .gov-portal-nav .container { flex-direction: column; text-align: center; }
+      .footer-content { flex-direction: column; }
+      .footer-section { min-width: 100%; margin: 0 0 20px 0; }
+      .chat-window { width: 90%; right: 5%; bottom: 90px; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="home-portal-header" style="display: block;">
+    <div class="home-header-top">
+      <div class="container">
+        <span>Padhega India, Tabhi To Badhega India</span>
+        <a href="#" class="btn" style="background-color: #f97316; color: white; padding: 5px 15px; font-size: 0.9rem;" onclick="alert('Please select a language:\n\n1. English\n2. Hindi\n3. Marathi\n4. Telugu\n5. Bengali\n6. Tamil\n7. Gujarati'); return false;">CHOOSE YOUR LANGUAGE</a>
+      </div>
+    </div>
+    
+    <nav class="gov-portal-nav">
+      <div class="container">
+        <div class="gov-logo-section">
+          <img src="Logo.png" alt="Hiring Wallah Logo" style="height: 80px;" >
+          <div class="gov-title-text">
+            <h1>Government of India</h1>
+            <p>Internship Portal of Hiring Wallah</p>
+            <p style="font-size: 0.7rem; opacity: 0.6; margin-top: 2px;">सत्यमेव जयते</p>
+          </div>
+        </div>
+        
+        <ul class="gov-nav-links">
+          <li><a href="#" class="nav-link" data-section="home">Home</a></li>
+          <li><a href="#" class="nav-link" data-section="post-internship">Post Internship</a></li>
+          <li><a href="#" class="nav-link" data-section="internships">Find Internship</a></li>
+          <li><a href="#" class="btn" style="background-color: #f97316; color: white; padding: 5px 15px; font-size: 0.8rem;" data-section="login">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+  <header class="navbar" id="internal-navbar" style="display: none;">
+    <div class="logo">
+      <img src="Logo.png" alt="Hiring Wallah Logo" style="height: 55px; margin-right: 10px;"> Hiring Wallah
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link" data-section="home">Home</a></li>
+      <li><a href="#" class="nav-link" data-section="post-internship">Post Internship</a></li>
+      <li><a href="#" class="nav-link" data-section="internships">Find Internship</a></li>
+      <li><a href="#" class="btn btn-primary nav-link" style="background-color: #f97316; color: white; padding: 5px 15px; font-size: 0.8rem;"data-section="login">Login</a></li>
+    </ul>
+  </header>
+
+  <main class="container">
+
+    <section id="home" class="section active" style="padding: 0;">
+        <div class="home-search-bar">
+          <input type="text" placeholder="Search government, internships, skills, schemes...">
+          <button class="search-btn" onclick="document.getElementById('internships').classList.add('active'); document.getElementById('home').classList.remove('active'); document.getElementById('home-portal-header').style.display = 'none'; document.getElementById('internal-navbar').style.display = 'flex';">Search</button>
+        </div>
+        
+        <div class="home-content-area">
+            <h1>Welcome to PM Internship Portal</h1>
+            <p>
+                Empowering the youth with opportunities to learn, grow, and contribute to nation building.
+            </p>
+            <a href="#" class="apply-btn" data-section="internships">Apply Now</a>
+        </div>
+        
+        <div class="info-section">
+            <h2>Quick Access to Core Services</h2>
+            <div class="card-grid">
+                <div class="quick-access-card">
+                    <div class="icon">💻</div>
+                    <h4>AI Matching Engine</h4>
+                    <p>Find personalized internships based on your profile and skills in seconds.</p>
+                    <a href="#" data-section="internships">Start Search &rarr;</a>
+                </div>
+                <div class="quick-access-card">
+                    <div class="icon">🎓</div>
+                    <h4>Skill Development Schemes</h4>
+                    <p>Access certified training programs to make you job-ready for government roles.</p>
+                    <a href="#">View Schemes &rarr;</a>
+                </div>
+                <div class="quick-access-card">
+                    <div class="icon">👥</div>
+                    <h4>Recruiter Portal</h4>
+                    <p>Post internships and access a pool of pre-assessed, nation-wide talent.</p>
+                    <a href="#" data-section="post-internship">Post Role &rarr;</a>
+                </div>
+                <div class="quick-access-card">
+                    <div class="icon">💼</div>
+                    <h4>Application Status</h4>
+                    <p>Track the progress of your internship and job applications instantly.</p>
+                    <a href="#" data-section="login">Track Here &rarr;</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="about-portal">
+            <div class="content">
+                <h3>About the PM Internship Portal</h3>
+                <p>Hiring Wallah is inspired by the mandate of the Prime Minister's Office to bridge the gap between youth from regional and rural areas and verified work opportunities. We leverage simple, light-weight AI to provide transparent and equitable access.</p>
+                <ul>
+                    <li>✅ **Verified Opportunities:** Only approved government and authorized private sector internships are listed.</li>
+                    <li>✅ **Focus on Youth:** Built for first-time internship seekers and those with low digital literacy.</li>
+                    <li>✅ **National Reach:** Opportunities available across all major cities and regional districts.</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="login" class="section">
+        <div class="card">
+            <div class="login-header">
+                <img src="Logo.png" alt="Hiring Wallah Logo" style="height: 80px;">
+                <h2>Welcome Back</h2>
+                <p>Login to continue to Hiring Wallah</p>
+            </div>
+            <form style="margin-top: 30px;">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••">
+              </div>
+              <button type="submit" class="btn btn-secondary-orange btn-block" style="margin-top: 25px;">Login</button>
+            </form>
+            <div class="signup-link-footer">
+               <p style="margin-top: 20px;">Don't have an account? <a href="#" data-section="signup">Sign Up</a></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="signup" class="section">
+        <div class="card" >
+            <div class="login-header">
+                <img src="Logo.png" alt="Hiring Wallah Logo" style="height: 80px;">
+                <h2>Create an Account</h2>
+                <p>Join Hiring Wallah to access exclusive opportunities.</p>
+            </div>
+          <form style="margin-top: 30px;">
+            <div class="form-group">
+              <label for="signup-email">Email</label>
+              <input type="email" id="signup-email" placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="signup-password">Password</label>
+              <input type="password" id="signup-password" placeholder="••••••••">
+            </div>
+            <div class="form-group">
+              <label for="confirm-password">Confirm Password</label>
+              <input type="password" id="confirm-password" placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" style="margin-top: 25px;">Sign up</button>
+          </form>
+          <p style="margin-top: 20px;">Already have an account? <a href="#" data-section="login">Login</a></p>
+        </div>
+    </section>
+
+
+    <section id="post-internship" class="section">
+        <div class="card">
+            <h2>Post an Internship Opportunity</h2>
+            <p class="sub-header">Connect with skilled youth and contribute to the PM Internship Scheme.</p>
+
+            <form id="post-internship-form">
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="org-name">Organization Name *</label>
+                        <input type="text" id="org-name" placeholder="e.g., Ministry of X, Tech Solutions Pvt Ltd" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="internship-title">Internship Role Title *</label>
+                        <input type="text" id="internship-title" placeholder="e.g., Data Analysis Intern, Rural Field Coordinator" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-title">
+                        <h4>Role Requirements</h4>
+                    </div>
+                    <div class="form-group inline-fields">
+                        <div>
+                            <label for="education-req">Minimum Education *</label>
+                            <select id="education-req" required>
+                                <option value="">Select Level</option>
+                                <option value="high_school">10+2 / Diploma</option>
+                                <option value="bachelor">Bachelor's Degree</option>
+                                <option value="master">Master's Degree or Higher</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="stipend">Stipend (Monthly) *</label>
+                            <input type="number" id="stipend" placeholder="e.g., 5000" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location-req">Location Preference *</label>
+                        <select id="location-req" required>
+                            <option value="">Select Location</option>
+                            <option value="remote">Remote (Work From Home)</option>
+                            <option value="metro">Major City (Metro/Tier 1)</option>
+                            <option value="regional">Regional/District Headquarters</option>
+                            <option value="rural">Rural/Field Area</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Required Skill Keywords (Click to select)</label>
+                        <div class="form-tags">
+                            <span class="tag" onclick="toggleTag(this)">Data Entry</span>
+                            <span class="tag" onclick="toggleTag(this)">Python/Coding</span>
+                            <span class="tag" onclick="toggleTag(this)">Field Survey</span>
+                            <span class="tag" onclick="toggleTag(this)">Tally/Accounting</span>
+                            <span class="tag" onclick="toggleTag(this)">Social Media Mgmt</span>
+                            <span class="tag" onclick="toggleTag(this)">Local Language (Hindi/Regional)</span>
+                            <span class="tag" onclick="toggleTag(this)">Excel/MS Office</span>
+                        </div>
+                        <input type="hidden" id="required-skills" name="required-skills" value="">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="role-description">Role Description *</label>
+                        <textarea id="role-description" rows="5" placeholder="Describe the main tasks, expected outcomes, and benefits for the intern (e.g., Government Certificate)." required></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Submit Internship for Approval</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="internships" class="section">
+      <div class="card" style="max-width: 900px; margin: 40px auto; padding: 60px;">
+        <h2>Find Your Perfect Internship</h2>
+        <p style="margin-bottom: 30px;">Use our AI to analyze your profile and find the best internship matches for you.</p>
+
+        <div class="tab-container">
+          <button class="tab-button active" data-tab="ai-scan">AI Resume Scan</button>
+          <button class="tab-button" data-tab="manual-search">Manual Search</button>
+        </div>
+
+        <div id="ai-scan" class="tab-content" style="display: block;">
+            
+            <div id="ai-scan-loading" class="loading-container" style="display: none;">
+                <div class="loader"></div>
+                <h4 style="color: #1e40af; margin-top: 15px;">Analyzing your profile...</h4>
+                <p>Our AI is finding the best opportunities for you.</p>
+            </div>
+            
+            <div id="ai-scan-form-wrapper" class="form-wrapper ai-scan-content">
+                
+                <form id="resume-scan-form">
+                    <div class="upload-area-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#1e40af" viewBox="0 0 16 16" style="margin-bottom: 10px;">
+                            <path d="M10.854 6.646a.5.5 0 0 0-.708-.708L8.5 8.293V3.5a.5.5 0 0 0-1 0v4.793L5.854 5.938a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3z"/>
+                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3.5h4v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                        </svg>
+                        <h4>AI-Powered Resume Scan</h4>
+                        <p>Upload your **PDF resume** below. Our AI will analyze your profile and provide instant matches.</p>
+                        
+                        <label for="pdf-upload" class="file-input-label" style="display: block; margin: 25px 0;">
+                            <input type="file" id="pdf-upload" accept=".pdf" required>
+                            <span class="btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 5px;">
+                                    <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.42 0 4.242 1.222 5.078 3.551.928-.79 2.05-.275 2.05.973V15.5a.5.5 0 0 1-.5.5h-15a.5.5 0 0 1-.5-.5V3.5a.5.5 0 0 1 .5-.5c.823-.8 1.956-.514 2.828.322a4.53 4.53 0 0 0 2.078-1.551zM8 1.5a4.52 4.52 0 0 0-4.008 2.502.5.5 0 0 1-.796.347A3.5 3.5 0 0 0 1.5 6.5V14h13V6.5a3.5 3.5 0 0 0-3.5-3.5.5.5 0 0 1-.796-.347A4.52 4.52 0 0 0 8 1.5zM7.5 7v3.5l-1.5-1.5a.5.5 0 0 0-.707.708l2.5 2.5a.5.5 0 0 0 .707 0l2.5-2.5a.5.5 0 0 0-.707-.708L8.5 10.5V7a.5.5 0 0 0-1 0z"/>
+                                </svg>
+                                Upload Resume (PDF)
+                            </span>
+                        </label>
+                        
+                        <div id="file-name" class="file-name-display" style="color: #999;">No file selected</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="padding: 12px 30px; margin-top: 15px;">
+                        Start AI Scan & Find Matches
+                    </button>
+                </form>
+            </div>
+            
+            <div id="ai-scan-recommendations-wrapper" class="recommendations-wrapper ai-scan-content" style="display: none;">
+                <h4 style="color: #555; text-align: center; font-size: 1.4rem;">5 AI Recommended Internships Found</h4>
+                <div id="resume-recommendation-list">
+                    </div>
+                <button class="btn btn-outline" style="margin-top: 30px;" onclick="document.getElementById('ai-scan-form-wrapper').style.display='block'; document.getElementById('ai-scan-recommendations-wrapper').style.display='none'; document.getElementById('file-name').textContent='No file selected'; document.getElementById('pdf-upload').value = '';">Scan Another Resume</button>
+            </div>
+        </div>
+        
+        <div id="manual-search" class="tab-content" style="display: none;">
+          <div id="manual-search-form-wrapper" class="form-wrapper">
+            <div class="profile-header">
+              <h4 style="color: #555;">👤 Your Profile</h4>
+              <p style="font-size: 0.9rem; color: #999;">3 minutes to find your perfect match</p>
+            </div>
+            
+            <form id="manual-profile-form" style="text-align: left;">
+              
+              <div class="form-section">
+                  <div class="form-section-title">
+                      <span style="font-size: 1.5rem;">&#x261E;</span>
+                      <h4>Basic Information</h4>
+                  </div>
+                  <div class="form-group inline-fields">
+                      <div>
+                          <label for="full-name">Full Name *</label>
+                          <input type="text" id="full-name" placeholder="Enter your full name">
+                      </div>
+                      <div>
+                          <label for="age">Age *</label>
+                          <input type="number" id="age" placeholder="Enter your age">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="form-section">
+                  <div class="form-section-title">
+                      <span style="font-size: 1.5rem;">🎓</span>
+                      <h4>Education</h4>
+                  </div>
+                  <div class="form-group">
+                      <label for="education-level">Education Level *</label>
+                      <select id="education-level" name="education">
+                          <option value="">Select your education level</option>
+                          <optgroup label="Pre-University / Vocational">
+                            <option value="high_school">10+2 / Pre-University</option>
+                            <option value="diploma">Diploma / ITI / Polytechnic</option>
+                          </optgroup>
+                          <optgroup label="Undergraduate / Professional">
+                            <option value="bachelor">Bachelor's Degree (B.A., B.Sc., B.Com, B.Tech, etc.)</option>
+                            <option value="bachelor_final_year">Bachelor's Degree - Final Year</option>
+                          </optgroup>
+                          <optgroup label="Postgraduate / Advanced">
+                            <option value="master">Master's Degree (M.A., M.Sc., M.Tech, MBA, etc.)</option>
+                            <option value="master_final_year">Master's Degree - Final Year</option>
+                            <option value="phd">PhD / Doctorate / Research Scholar</option>
+                          </optgroup>
+                          <optgroup label="Other">
+                            <option value="completed_training">Completed Vocational/Skill Training</option>
+                          </optgroup>
+                      </select>
+                  </div>
+              </div>
+
+              <div class="form-section">
+                  <div class="form-section-title">
+                      <span style="font-size: 1.5rem;">📍</span>
+                      <h4>Location Preference</h4>
+                  </div>
+                  <div class="form-group">
+                      <label for="preferred-location">Preferred Location *</label>
+                      <select id="preferred-location" name="location">
+                          <option value="">Select your preferred location</option>
+                          <option value="remote">Remote (Work From Home)</option>
+                          <optgroup label="Metropolitan Hubs">
+                              <option value="delhi">Delhi - NCR</option>
+                              <option value="mumbai">Maharashtra - Mumbai</option>
+                              <option value="bangalore">Karnataka - Bangalore</option>
+                              <option value="chennai">Tamil Nadu - Chennai</option>
+                              <option value="kolkata">West Bengal - Kolkata</option>
+                              <option value="hyderabad">Telangana - Hyderabad</option>
+                          </optgroup>
+                          <optgroup label="Regional Centers (Tier 2)">
+                              <option value="ahmedabad">Gujarat - Ahmedabad</option>
+                              <option value="pune">Maharashtra - Pune</option>
+                              <option value="jaipur">Rajasthan - Jaipur</option>
+                              <option value="lucknow">Uttar Pradesh - Lucknow</option>
+                              <option value="kochi">Kerala - Kochi</option>
+                              <option value="chandigarh">Punjab/Haryana - Chandigarh</option>
+                              <option value="bhopal">Madhya Pradesh - Bhopal</option>
+                          </optgroup>
+                          <optgroup label="Andhra Pradesh / Telangana">
+                              <option value="andhra_pradesh">Andhra Pradesh (Regional)</option>
+                              <option value="telangana_regional">Telangana (Regional)</option>
+                          </optgroup>
+                          <optgroup label="Bihar / Jharkhand">
+                              <option value="patna">Bihar - Patna</option>
+                              <option value="jamshedpur">Jharkhand - Jamshedpur</option>
+                              <option value="bihar_regional">Bihar (Regional)</option>
+                          </optgroup>
+                          <optgroup label="Gujarat / Rajasthan">
+                              <option value="surat">Gujarat - Surat</option>
+                              <option value="vadodara">Gujarat - Vadodara</option>
+                              <option value="rajkot">Gujarat - Rajkot</option>
+                              <option value="jodhpur">Rajasthan - Jodhpur</option>
+                          </optgroup>
+                          <optgroup label="Karnataka / Kerala">
+                              <option value="mysuru">Karnataka - Mysuru</option>
+                              <option value="mangalore">Karnataka - Mangalore</option>
+                              <option value="thiruvananthapuram">Kerala - Thiruvananthapuram</option>
+                          </optgroup>
+                          <optgroup label="Madhya Pradesh / Chhattisgarh">
+                              <option value="indore">MP - Indore</option>
+                              <option value="jabalpur">MP - Jabalpur</option>
+                              <option value="raipur">Chhattisgarh - Raipur</option>
+                          </optgroup>
+                          <optgroup label="Maharashtra">
+                              <option value="nagpur">Maharashtra - Nagpur</option>
+                              <option value="nashik">Maharashtra - Nashik</option>
+                          </optgroup>
+                          <optgroup label="North-East India (General)">
+                              <option value="guwahati">Assam - Guwahati</option>
+                              <option value="ne_general">North-East Region (General)</option>
+                          </optgroup>
+                          <optgroup label="Uttar Pradesh / Uttarakhand">
+                              <option value="kanpur">UP - Kanpur</option>
+                              <option value="ghaziabad">UP - Ghaziabad</option>
+                              <option value="dehradun">Uttarakhand - Dehradun</option>
+                          </optgroup>
+                          <optgroup label="Rest of India (General/Rural)">
+                              <option value="odisha">Odisha (Regional)</option>
+                              <option value="punjab_regional">Punjab (Regional)</option>
+                              <option value="haryana_regional">Haryana (Regional)</option>
+                              <option value="assam_regional">Assam (Regional)</option>
+                              <option value="rural_general">Any Rural/District Area</option>
+                              <option value="coastal_india">Coastal Regions (General)</option>
+                          </optgroup>
+                      </select>
+                  </div>
+              </div>
+
+              <div class="form-section">
+                  <div class="form-section-title">
+                      <span style="font-size: 1.5rem;">⚙️</span>
+                      <h4>Skills & Abilities</h4>
+                  </div>
+                  <div class="form-grid">
+                      <div class="grid-item"><input type="checkbox" id="skill-comm" name="skill" value="communication"><label for="skill-comm">Communication</label></div>
+                      <div class="grid-item"><input type="checkbox" id="skill-comp" name="skill" value="computer_literacy"><label for="skill-comp">Computer Literacy</label></div>
+                      <div class="grid-item"><input type="checkbox" id="skill-data" name="skill" value="data_entry"><label for="skill-data">Data Entry</label></div>
+                      <div class="grid-item"><input type="checkbox" id="skill-cs" name="skill" value="customer_service"><label for="skill-cs">Customer Service</label></div>
+                      <div class="grid-item"><input type="checkbox" id="skill-acc" name="skill" value="basic_accounting"><label for="skill-acc">Basic Accounting</label></div>
+                      <div class="grid-item"><input type="checkbox" id="skill-mkt" name="skill" value="marketing"><label for="skill-mkt">Marketing</label></div>
+                      <div class="grid-item"><input type="checkbox" id="skill-social" name="skill" value="social_media"><label for="skill-social">Social Media</label></div>
+                      <div class="grid-item"><input type="checkbox" id="skill-teach" name="skill" value="teaching"><label for="skill-teach">Teaching</label></div>
+                      <div class="grid-item"><input type="checkbox" id="skill-health" name="skill" value="healthcare"><label for="skill-health">Healthcare</label></div>
+                      <div class="grid-item"><input type="checkbox" id="skill-agri" name="skill" value="agriculture"><label for="skill-agri">Agriculture</label></div>
+                      <div class="grid-item"><input type="checkbox" id="skill-handi" name="skill" value="handicrafts"><label for="skill-handi">Handicrafts</label></div>
+                      <div class="grid-item"><input type="checkbox" id="skill-tech" name="skill" value="technical_skills"><label for="skill-tech">Technical Skills</label></div>
+                  </div>
+              </div>
+
+              <div class="form-section">
+                  <div class="form-section-title">
+                      <span style="font-size: 1.5rem;">🌟</span>
+                      <h4>Areas of Interest</h4>
+                  </div>
+                  <div class="form-grid">
+                      <div class="grid-item"><input type="checkbox" id="interest-gov" name="interest" value="government_sector"><label for="interest-gov">Government Sector</label></div>
+                      <div class="grid-item"><input type="checkbox" id="interest-private" name="interest" value="private_sector"><label for="interest-private">Private Sector</label></div>
+                      <div class="grid-item"><input type="checkbox" id="interest-nonprofit" name="interest" value="non_profit"><label for="interest-nonprofit">Non-Profit</label></div>
+                      <div class="grid-item"><input type="checkbox" id="interest-edu" name="interest" value="education"><label for="interest-edu">Education</label></div>
+                      <div class="grid-item"><input type="checkbox" id="interest-health" name="interest" value="healthcare_interest"><label for="interest-health">Healthcare</label></div>
+                      <div class="grid-item"><input type="checkbox" id="interest-tech" name="interest" value="technology"><label for="interest-tech">Technology</label></div>
+                      <div class="grid-item"><input type="checkbox" id="interest-agri" name="interest" value="agriculture_interest"><label for="interest-agri">Agriculture</label></div>
+                      <div class="grid-item"><input type="checkbox" id="interest-tourism" name="interest" value="tourism"><label for="interest-tourism">Tourism</label></div>
+                      <div class="grid-item"><input type="checkbox" id="interest-mfg" name="interest" value="manufacturing"><label for="interest-mfg">Manufacturing</label></div>
+                      <div class="grid-item"><input type="checkbox" id="interest-finance" name="interest" value="financial_services"><label for="interest-finance">Financial Services</label></div>
+                      <div class="grid-item"><input type="checkbox" id="interest-media" name="interest" value="media_entertainment"><label for="interest-media">Media & Entertainment</label></div>
+                      <div class="grid-item"><input type="checkbox" id="interest-rural" name="interest" value="rural_development"><label for="interest-rural">Rural Development</label></div>
+                  </div>
+              </div>
+
+              <div class="form-section">
+                  <div class="form-section-title">
+                      <span style="font-size: 1.5rem;">&#x1F4DC;</span>
+                      <h4>Previous Experience (Optional)</h4>
+                  </div>
+                  <div class="form-group">
+                      <textarea id="previous-experience" placeholder="Briefly describe any work experience, volunteer work, or relevant activities..." rows="4"></textarea>
+                  </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">Get My Recommendations</button>
+            </form>
+          </div>
+          
+          <div id="manual-search-recommendations-wrapper" class="recommendations-wrapper" style="display: none;">
+                <h4 style="color: #555; text-align: left;">5 AI Recommended Internships Found</h4>
+                <p style="text-align: left; margin-bottom: 20px;">Based on your profile, here are the top 5 recommended opportunities from the PM Scheme.</p>
+                <div id="recommendation-list">
+                    </div>
+                <button class="btn btn-outline" style="margin-top: 30px;" onclick="document.getElementById('manual-search-form-wrapper').style.display='block'; document.getElementById('manual-search-recommendations-wrapper').style.display='none';">Update Profile & Re-Search</button>
+            </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="chat-window" id="chat-window">
+    <div class="chat-header">
+      <span>AI Support Assistant</span>
+      <span style="cursor: pointer;" onclick="document.getElementById('chat-window').style.display='none';">✖</span>
+    </div>
+    <div class="chat-body" id="chat-body">
+        <div class="message bot">
+            Hello! I'm your AI Assistant for the PM Internship Portal. How can I help you get started? Try asking about **internships**, **login**, or **skills**.
+        </div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Type your query...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <div class="chatbot-btn" id="chatbot-toggle-btn">
+    💬
+  </div>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <div class="logo" style="margin-bottom: 10px;">
+            <div class="logo-icon">🏛️</div>
+            <span style="color: white; font-size: 1.2rem; font-weight: 700;">Hiring Wallah</span>
+        </div>
+        <p style="margin-top: 10px; color: rgba(255,255,255,0.8);">
+            Official portal for PM Internship Scheme. Empowering India's youth with skills and opportunities.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#" data-section="home">Home</a></li>
+          <li><a href="#" data-section="internships">Find Internships</a></li>
+          <li><a href="#" data-section="post-internship">Post Internship</a></li>
+          <li><a href="#">Government Schemes</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">FAQ / Guidelines</a></li>
+          <li><a href="#">Terms & Privacy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section contact-info">
+        <h4>Contact Us</h4>
+        <p>Ministry of Skill Development,</p>
+        <p>New Delhi, India</p>
+        <p>📞 +91 98765 43210</p>
+        <p>📧 support@hiringwallah.gov.in</p>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">
+        © 2025 Government of India. All Rights Reserved.
+    </div>
+  </footer>
+
+  <script>
+    // --- Sample Internship Data (Location values updated to match new options) ---
+    const internshipData = [
+        { 
+            title: "Rural Digital Literacy Facilitator", 
+            education: ["high_school", "diploma", "completed_training"], 
+            location: ["rural_general", "bihar_regional", "odisha", "assam_regional", "jodhpur"], 
+            interests: ["rural_development", "education"], 
+            skills: ["communication", "computer_literacy", "teaching"],
+            requirements_display: ["Comm. Skills", "Basic IT", "Teaching"],
+            reason: "The profile shows strong interest in **Rural Development** and practical skills like **Communication** and **Teaching**, directly matching the scheme's goal of digital literacy outreach in regional areas.",
+            baseScore: 40 
+        },
+        { 
+            title: "Data Entry Specialist - Ministry of Finance", 
+            education: ["bachelor", "master", "master_final_year"], 
+            location: ["delhi", "mumbai", "bangalore", "remote", "pune", "ahmedabad", "hyderabad", "kolkata"], 
+            interests: ["government_sector", "financial_services"], 
+            skills: ["data_entry", "basic_accounting", "computer_literacy"],
+            requirements_display: ["Data Entry", "Accounting", "Bachelors"],
+            reason: "Your **Bachelor's/Master's** degree and technical skills like **Basic Accounting** align perfectly with the Ministry's need for precision in financial data validation.",
+            baseScore: 40
+        },
+        { 
+            title: "Field Investigator - Agriculture Census Scheme", 
+            education: ["high_school", "diploma", "bachelor"], 
+            location: ["rural_general", "patna", "bhopal", "raipur", "andhra_pradesh", "telangana_regional", "surat", "kanpur"], 
+            interests: ["agriculture_interest", "government_sector"], 
+            skills: ["agriculture", "communication"],
+            requirements_display: ["Agriculture", "Comm. Skills", "Field Work"],
+            reason: "The selection of **Agriculture** as a core interest combined with regional location preference makes you an ideal candidate for on-site census and survey work.",
+            baseScore: 40
+        },
+        { 
+            title: "NGO Project Coordinator Assistant", 
+            education: ["bachelor", "master", "bachelor_final_year"], 
+            location: ["pune", "jaipur", "kochi", "thiruvananthapuram", "bhopal", "ghaziabad", "jamshedpur"], 
+            interests: ["non_profit", "healthcare_interest", "education"], 
+            skills: ["communication", "social_media"],
+            requirements_display: ["Project Coord.", "Social Media", "Bachelors"],
+            reason: "Your focus on **Non-Profit/Healthcare** sectors and strong **Communication** skills are essential for coordinating social projects and managing outreach campaigns.",
+            baseScore: 40
+        },
+        { 
+            title: "Junior Web/App Developer (Startup India)", 
+            education: ["diploma", "bachelor", "master"], 
+            location: ["bangalore", "hyderabad", "delhi", "remote", "pune", "chennai", "mumbai"], 
+            interests: ["technology", "private_sector"], 
+            skills: ["technical_skills", "computer_literacy"],
+            requirements_display: ["Coding", "Tech Skills", "Diploma/Bachelors"],
+            reason: "Demonstrated **Technical Skills** and an interest in the **Private Sector/Technology** make you highly suitable for quick deployment into a high-growth tech startup environment.",
+            baseScore: 40
+        },
+    ];
+
+    // --- Recommendation Logic (Manual & AI Scan uses this) ---
+    function calculateMatchScore(profile) {
+        let recommendations = internshipData.map(internship => {
+            let score = internship.baseScore;
+            const profileSkills = profile.skills || [];
+            const profileInterests = profile.interests || [];
+
+            // 1. Education Match (Weight: 20 points)
+            if (internship.education.includes(profile.education)) {
+                score += 20;
+            }
+
+            // 2. Location Match (Weight: 15 points)
+            if (internship.location.includes(profile.location)) {
+                score += 15;
+            }
+
+            // 3. Interest Match (Weight: 15 points per match, max 30)
+            let interestMatches = 0;
+            profileInterests.forEach(interest => {
+                if (internship.interests.includes(interest)) {
+                    interestMatches++;
+                }
+            });
+            score += Math.min(interestMatches * 15, 30);
+
+            // 4. Skills Match (Weight: 10 points per match, max 35)
+            let skillMatches = 0;
+            profileSkills.forEach(skill => {
+                if (internship.skills.includes(skill)) {
+                    skillMatches++;
+                }
+            });
+            score += Math.min(skillMatches * 10, 35);
+            
+            // Normalize score
+            const maxPossibleScore = 40 + 20 + 15 + 30 + 35; // 140
+            let finalPercent = Math.round((score / maxPossibleScore) * 100);
+            
+            return { ...internship, finalScore: score, matchPercent: finalPercent };
+        });
+
+        // Sort by score and take top 5
+        recommendations.sort((a, b) => b.finalScore - a.finalScore);
+        return recommendations.slice(0, 5).filter(rec => rec.finalScore > 50); 
+    }
+    
+    // --- Rendering Function ---
+    function renderRecommendations(recs, targetElementId) {
+        const list = document.getElementById(targetElementId);
+        list.innerHTML = '';
+
+        if (recs.length === 0) {
+            list.innerHTML = `
+                <div class="rec-placeholder" style="color: #ff6b35;">
+                    😥 No strong matches found based on your profile.
+                    <br>
+                    Try updating your interests and skills to broaden your search!
+                    <br><br>
+                    <span style="font-size: 40px;">🔄</span>
+                </div>
+            `;
+            return;
+        }
+
+        recs.forEach((rec, index) => {
+            const card = document.createElement('div');
+            card.className = 'rec-card';
+            card.style.animationDelay = `${index * 0.1}s`;
+            
+            const requirementsTags = rec.requirements_display.map(req => `<span class="req-tag">${req}</span>`).join('');
+            
+            card.innerHTML = `
+                <div class="rec-header">
+                    <h4>${rec.title}</h4>
+                    <span>${rec.location.includes('remote') ? '&#x1F4BB; Remote' : '&#x1F3D9; On-Site'}</span>
+                </div>
+                
+                <div class="match-reason-box">
+                    <strong>✨ AI Match Reason (Match ${rec.matchPercent}%)</strong>
+                    <p style="margin-top: 5px;">${rec.reason}</p>
+                </div>
+
+                <div class="key-requirements">
+                    <strong>&#x2699; Key Requirements</strong>
+                    <div class="tags-container" style="margin-top: 5px; display: block;">${requirementsTags}</div>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="#" class="btn btn-primary" style="padding: 10px 25px;">View Details & Apply</a>
+                    <a href="#" class="btn btn-outline" style="padding: 10px 25px;">Save for Later</a>
+                </div>
+            `;
+            list.appendChild(card);
+        });
+    }
+
+    // --- Tag Toggling Logic for Post Internship Form ---
+    function updateTagInput() {
+        const selectedTags = Array.from(document.querySelectorAll('.form-tags .tag.selected')).map(tag => tag.textContent.trim());
+        document.getElementById('required-skills').value = selectedTags.join(', ');
+    }
+
+    window.toggleTag = function(element) {
+        element.classList.toggle('selected');
+        updateTagInput();
+    };
+
+    // --- Chatbot Functionality ---
+    function addMessage(sender, text) {
+        const chatBody = document.getElementById('chat-body');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}`;
+        messageDiv.innerHTML = text;
+        chatBody.appendChild(messageDiv);
+        chatBody.scrollTop = chatBody.scrollHeight; // Auto-scroll to bottom
+    }
+
+    window.toggleChat = function() {
+        const chatWindow = document.getElementById('chat-window');
+        chatWindow.style.display = (chatWindow.style.display === 'flex') ? 'none' : 'flex';
+        if (chatWindow.style.display === 'flex') {
+            document.getElementById('chat-input').focus();
+        }
+    }
+    
+    function respondToQuery(query) {
+        const lowerQuery = query.toLowerCase();
+        let response = "I'm sorry, I didn't understand that. I can help with topics like **internships**, **login**, **recruiter**, or **skills**. Can you try a different keyword?";
+
+        if (lowerQuery.includes('internship') || lowerQuery.includes('apply')) {
+            response = `To find an internship, click on the **Find Internship** tab. You can use the **AI Resume Scan** or fill out your **Profile Manually**!`;
+        } else if (lowerQuery.includes('login') || lowerQuery.includes('sign in')) {
+            response = `You can log in by clicking the **Login** button in the top right corner. If you are a new user, please click 'Sign Up' below the login button.`;
+        } else if (lowerQuery.includes('skill')) {
+            response = `Our portal uses a skills-based matching system. Please ensure you carefully select your **Skills & Abilities** in the manual search form for the best match reasons.`;
+        } else if (lowerQuery.includes('recruiter') || lowerQuery.includes('post')) {
+            response = `If you are a recruiter or organization, please use the **Post Internship** tab to submit your roles for verification and approval.`;
+        } else if (lowerQuery.includes('pm scheme') || lowerQuery.includes('about')) {
+            response = `This is the official portal inspired by the **PM Internship Scheme**. Our goal is to connect rural and regional youth with verified national opportunities.`;
+        }
+
+        setTimeout(() => addMessage('bot', response), 500);
+    }
+    
+    window.sendMessage = function() {
+        const input = document.getElementById('chat-input');
+        const text = input.value.trim();
+        if (text === "") return;
+
+        addMessage('user', text);
+        input.value = '';
+        respondToQuery(text);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // --- Section and Tab Navigation ---
+      const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const tabs = document.querySelectorAll('.tab-button');
+      const tabContents = document.querySelectorAll('.tab-content');
+      const homePortalHeader = document.getElementById('home-portal-header');
+      const internalNavbar = document.getElementById('internal-navbar');
+      const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+
+
+      function showSection(id) {
+        sections.forEach(section => section.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        
+        // Control visibility of the two main headers
+        if (id === 'home') {
+            homePortalHeader.style.display = 'block';
+            internalNavbar.style.display = 'none';
+        } else {
+            homePortalHeader.style.display = 'none';
+            internalNavbar.style.display = 'flex';
+        }
+      }
+
+      // Handle nav and internal link clicks
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          showSection(e.target.getAttribute('data-section'));
+        });
+      });
+      document.querySelectorAll('.signup-link-footer a, #signup a[data-section="login"], .home-content-area a, .gov-nav-links a, .quick-access-card a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          showSection(e.target.getAttribute('data-section'));
+        });
+      });
+
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(item => item.classList.remove('active'));
+          tab.classList.add('active');
+          
+          tabContents.forEach(content => content.style.display = 'none');
+          const targetTab = document.getElementById(tab.getAttribute('data-tab'));
+          targetTab.style.display = 'block';
+        });
+      });
+      
+      // Initial setup on DOM load
+      showSection('home');
+      const aiScanTabButton = document.querySelector('.tab-button[data-tab="ai-scan"]');
+      const manualSearchTabButton = document.querySelector('.tab-button[data-tab="manual-search"]');
+      if (aiScanTabButton) aiScanTabButton.classList.add('active');
+      if (manualSearchTabButton) manualSearchTabButton.classList.remove('active');
+
+
+      // --- 1. Manual Search Form Submission ---
+      const manualForm = document.getElementById('manual-profile-form');
+      manualForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const education = document.getElementById('education-level').value;
+          const location = document.getElementById('preferred-location').value;
+          
+          if (!education || !location) {
+              alert("Please select your Education Level and Preferred Location to get matches.");
+              return;
+          }
+
+          const profile = {
+              education: education,
+              location: location,
+              skills: Array.from(document.querySelectorAll('#manual-search input[name="skill"]:checked')).map(el => el.value),
+              interests: Array.from(document.querySelectorAll('#manual-search input[name="interest"]:checked')).map(el => el.value)
+          };
+
+          const recommendations = calculateMatchScore(profile);
+          
+          renderRecommendations(recommendations, 'recommendation-list');
+
+          // Show results and hide form
+          document.getElementById('manual-search-form-wrapper').style.display = 'none';
+          document.getElementById('manual-search-recommendations-wrapper').style.display = 'block';
+      });
+
+      // --- 2. AI Resume Scan Submission ---
+      const resumeScanForm = document.getElementById('resume-scan-form');
+      const pdfUpload = document.getElementById('pdf-upload');
+      const fileNameDisplay = document.getElementById('file-name');
+      const aiScanLoading = document.getElementById('ai-scan-loading');
+      const aiScanFormWrapper = document.getElementById('ai-scan-form-wrapper');
+      const aiScanRecommendationsWrapper = document.getElementById('ai-scan-recommendations-wrapper');
+
+
+      pdfUpload.addEventListener('change', (e) => {
+          if (e.target.files.length > 0) {
+              fileNameDisplay.textContent = `File Selected: ${e.target.files[0].name}`;
+              fileNameDisplay.style.color = '#1e40af';
+          } else {
+              fileNameDisplay.textContent = 'No file selected';
+              fileNameDisplay.style.color = '#999';
+          }
+      });
+
+      resumeScanForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const file = pdfUpload.files[0];
+          
+          if (!file || file.type !== 'application/pdf') {
+              alert("Please upload a valid PDF resume file.");
+              return;
+          }
+
+          // Show Scanning Status and Loading Spinner
+          aiScanFormWrapper.style.display = 'none';
+          aiScanLoading.style.display = 'block';
+          
+          setTimeout(() => {
+              // Simulated AI extraction result
+              const simulatedProfile = {
+                  education: 'bachelor',
+                  location: 'bangalore', // Simulated location derived from resume
+                  skills: ['technical_skills', 'communication', 'data_entry', 'computer_literacy'],
+                  interests: ['technology', 'government_sector', 'private_sector']
+              };
+
+              const recommendations = calculateMatchScore(simulatedProfile);
+              renderRecommendations(recommendations, 'resume-recommendation-list');
+
+              // Hide loading, show results
+              aiScanLoading.style.display = 'none';
+              aiScanRecommendationsWrapper.style.display = 'block';
+              
+          }, 3000); // 3 second delay to simulate scanning time
+      });
+      
+      // --- 3. Post Internship Submission ---
+      const postForm = document.getElementById('post-internship-form');
+      postForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const title = document.getElementById('internship-title').value;
+          
+          alert(`Success! Internship "${title}" submitted for review. An admin will approve it shortly.`);
+          // Clear form after submission for the prototype
+          postForm.reset();
+          document.getElementById('required-skills').value = '';
+          document.querySelectorAll('.form-tags .tag.selected').forEach(tag => tag.classList.remove('selected'));
+      });
+
+
+      // --- Chatbot Fix ---
+      document.getElementById('chatbot-toggle-btn').addEventListener('click', toggleChat);
+      document.getElementById('chat-input').addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+              sendMessage();
+          }
+      });
+    });
+  </script>
+</body>
+</html>
